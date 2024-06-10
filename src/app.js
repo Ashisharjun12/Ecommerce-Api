@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import errorHandler from "./middlewares/ErrorHandler.js";
+import userRoute from "./routes/UserRoute.js";
+import cookieParser from "cookie-parser";
 
 //create app
 const app = express();
@@ -11,11 +13,20 @@ app.use(
     origin: "*",
   })
 );
+app.use(cookieParser());
 app.use(express.json());
+app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }));
+
+//check server
+app.get("/", (req, res) => {
+  res.json({ message: "server is running..." });
+});
 
 //routes
+app.use("/api/v1/user", userRoute);
 
 //error handel
-app.use(errorHandler)
+app.use(errorHandler);
 
 export default app;

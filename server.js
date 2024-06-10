@@ -13,7 +13,7 @@ const startServer = async()=>{
 
 
     app.get("/" , (req, res)=>{
-        console.log("server is running....")
+        console.log("server is working....")
     })
 
 

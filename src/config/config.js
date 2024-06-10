@@ -1,10 +1,21 @@
 import { config } from "dotenv";
 
-config()
+config();
 
-const { PORT , MONGO_URI} = process.env
+const {
+  PORT,
+  MONGO_URI,
+  JWT_SECRET,
+  CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
+} = process.env;
 
 export const _config = {
-    PORT,
-    MONGO_URI
-}
+  PORT,
+  MONGO_URI,
+  JWT_SECRET,
+  CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET
+};

@@ -3,6 +3,7 @@ import cors from "cors";
 import errorHandler from "./middlewares/ErrorHandler.js";
 import userRoute from "./routes/UserRoute.js";
 import cookieParser from "cookie-parser";
+import productroute from "./routes/ProductRoute.js";
 
 //create app
 const app = express();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/api/v1/user", userRoute);
+app.use('/api/v1/product' , productroute)
 
 //error handel
 app.use(errorHandler);

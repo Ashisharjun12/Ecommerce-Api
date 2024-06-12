@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, "password is required"],
       minlength: [6, "password should be min 6 char"],
       select: false,
+      
     },
     role: {
       type: String,
@@ -56,7 +57,7 @@ UserSchema.pre("save", async function (next) {
 });
 
 //validate password
-UserSchema.methods.IsvalidatedPassword = async function (usersendPassword) {
+UserSchema.methods.isValidatedPassword = async function (usersendPassword) {
   return await bcrypt.compare(usersendPassword, this.password);
 };
 

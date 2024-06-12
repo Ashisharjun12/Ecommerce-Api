@@ -1,7 +1,5 @@
-
-
-const cookieToken = (user , res)=>{
-     //get token
+const cookieToken = (user, res) => {
+  //get token
   const token = user.getToken();
 
   const options = {
@@ -14,8 +12,6 @@ const cookieToken = (user , res)=>{
     token,
     user,
   });
-
-
-}
+};
 
 export default cookieToken;

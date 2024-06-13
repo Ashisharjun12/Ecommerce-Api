@@ -22,7 +22,7 @@ const userRoute = express.Router();
 
 //define routes
 userRoute.post(
-  "/signUp",
+  "/user/signUp",
   upload.fields([
     {
       name: "photo",
@@ -31,14 +31,14 @@ userRoute.post(
   ]),
   SignUp
 );
-userRoute.post("/login", login);
-userRoute.get("/logout", logout);
-userRoute.post("/forgotpassword", forgotPassword);
-userRoute.post("/password/reset/:token", resetpassword);
-userRoute.get("/userdashboard", auth, getloggedInUserDetails);
-userRoute.post("/password/update", auth, changepassword);
+userRoute.post("/user/login", login);
+userRoute.get("/user/logout", logout);
+userRoute.post("/user/forgotpassword", forgotPassword);
+userRoute.post("/user/password/reset/:token", resetpassword);
+userRoute.get("/user/userdashboard", auth, getloggedInUserDetails);
+userRoute.post("/user/password/update", auth, changepassword);
 userRoute.post(
-  "/userdashboard/update",
+  "/user/userdashboard/update",
   auth,
   upload.fields([
     {
@@ -50,19 +50,27 @@ userRoute.post(
 );
 
 //admin routes
-userRoute.get('/admin/users' , auth, customrole('admin'),adminAllUser)
-userRoute.get('/admin/user/:id' , auth , customrole('admin') , admingetOneUser)
-userRoute.put('/admin/user/:id' ,auth , customrole('admin') ,adminupdateOneUser)
-userRoute.delete('/admin/user/:id' , auth , customrole('admin') , adminDeleteOneUser)
-
-
-
-
-
-
+userRoute.get("/user/admin/users", auth, customrole("admin"), adminAllUser);
+userRoute.get(
+  "/user/admin/user/:id",
+  auth,
+  customrole("admin"),
+  admingetOneUser
+);
+userRoute.put(
+  "/user/admin/user/:id",
+  auth,
+  customrole("admin"),
+  adminupdateOneUser
+);
+userRoute.delete(
+  "/user/admin/user/:id",
+  auth,
+  customrole("admin"),
+  adminDeleteOneUser
+);
 
 //manager routes
-userRoute.get('/manager/users' , auth, customrole('manager'),managerAllUser)
-
+userRoute.get("/user/manager/users", auth, customrole("manager"), managerAllUser);
 
 export default userRoute;

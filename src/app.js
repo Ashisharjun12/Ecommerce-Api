@@ -26,9 +26,9 @@ app.get("/", (req, res) => {
 });
 
 //routes
-app.use("/api/v1/user", userRoute);
-app.use("/api/v1/product", productroute);
-app.use("/api/v1/order", orderRoute);
+app.use("/api/v1", userRoute);
+app.use("/api/v1", productroute);
+app.use("/api/v1", orderRoute);
 
 //error handel
 app.use(errorHandler);

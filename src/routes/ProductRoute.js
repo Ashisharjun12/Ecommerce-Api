@@ -19,15 +19,15 @@ const productroute = express.Router();
 //define routes
 
 //user routes
-productroute.get("/products", getallProducts);
-productroute.get("/product/:productid", getOneProduct);
-productroute.put("/review/:productid", auth, addreview);
-productroute.delete("/review/:productid", auth, deleteReview);
-productroute.get("/review/:productid", getOnlyReviewForOneProduct);
+productroute.get("/product/products", getallProducts);
+productroute.get("/product/product/:productid", getOneProduct);
+productroute.put("/product/review/:productid", auth, addreview);
+productroute.delete("/product/review/:productid", auth, deleteReview);
+productroute.get("/product/review/:productid", getOnlyReviewForOneProduct);
 
 //admin routes
 productroute.post(
-  "/admin/product/add",
+  "/product/admin/product/add",
   auth,
   customrole("admin"),
   upload.fields([
@@ -39,13 +39,13 @@ productroute.post(
   addproduct
 );
 productroute.get(
-  "/admin/products",
+  "/product/admin/products",
   auth,
   customrole("admin"),
   admingetAllProducts
 );
 productroute.post(
-  "/admin/product/:productid",
+  "/product/admin/product/:productid",
   auth,
   customrole("admin"),
   upload.fields([
@@ -57,7 +57,7 @@ productroute.post(
   admingetUpdateOneProduct
 );
 productroute.delete(
-  "/admin/product/:productid",
+  "/product/admin/product/:productid",
   auth,
   customrole("admin"),
   admindeleteOneProduct

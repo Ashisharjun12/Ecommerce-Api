@@ -4,6 +4,7 @@ import errorHandler from "./middlewares/ErrorHandler.js";
 import userRoute from "./routes/UserRoute.js";
 import cookieParser from "cookie-parser";
 import productroute from "./routes/ProductRoute.js";
+import orderRoute from "./routes/OrderRoute.js";
 
 //create app
 const app = express();
@@ -16,7 +17,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 //check server
@@ -26,7 +27,8 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/api/v1/user", userRoute);
-app.use('/api/v1/product' , productroute)
+app.use("/api/v1/product", productroute);
+app.use("/api/v1/order", orderRoute);
 
 //error handel
 app.use(errorHandler);

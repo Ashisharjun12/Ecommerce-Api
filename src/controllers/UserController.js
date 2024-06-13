@@ -358,7 +358,7 @@ const adminDeleteOneUser = async (req, res, next) => {
   }
 };
 
-//manger
+//manager
 const managerAllUser = async (req, res, next) => {
   const users = await Usermodel.find({ role: "user" });
 

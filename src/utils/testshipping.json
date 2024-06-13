@@ -1,0 +1,26 @@
+{
+    "shippingInfo":{
+        "address":"patna",
+        "city":"patna",
+        "phoneNo":"9199999999",
+        "postalcode":"800007",
+        "state":"bihar",
+        "country":"India"
+    },
+    "orderItems":[
+        {
+            "name":"tshirt",
+            "quantity":4,
+            "image":"https://res.cloudinary.com/dumfswc0u/image/upload/v1718227126/products/cyttyrgmbdl9ak8ejynr.png",
+            "price":399,
+            "product":"666a10b926bd5d9fa0b52335"
+        }
+    ],
+    "paymentInfo":{
+        "id":"testId"
+    },
+    "taxAmount":"200",
+    "shippingAmount":100,
+    "totalAmount":700
+   
+}

@@ -3,7 +3,7 @@
 # step - 1
 
 ```
-clone the project from `https://github.com/Ashisharjun12/Doctor-Rest_Api.git`
+clone the project from `https://github.com/Ashisharjun12/Ecommerce-Api.git`
 
 ```
 # step - 2

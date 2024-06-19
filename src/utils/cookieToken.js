@@ -5,6 +5,7 @@ const cookieToken = (user, res) => {
   const options = {
     expires: new Date(new Date() + 3 * 24 * 60 * 60 * 1000),
     httpOnly: true,
+    sameSite:"strict"
   };
 
   res.status(200).cookie("token", token, options).json({

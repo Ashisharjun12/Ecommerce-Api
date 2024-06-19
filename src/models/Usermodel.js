@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { _config } from "../config/config.js";
@@ -24,7 +23,6 @@ const UserSchema = new mongoose.Schema(
       required: [true, "password is required"],
       minlength: [6, "password should be min 6 char"],
       select: false,
-      
     },
     role: {
       type: String,
@@ -39,7 +37,6 @@ const UserSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-  
     },
     forgotPasswordToken: String,
     forgotPasswordExpiry: Date,
@@ -53,7 +50,7 @@ UserSchema.pre("save", async function (next) {
     return next();
   }
   this.password = await bcrypt.hash(this.password, 10);
-  next()
+  next();
 });
 
 //validate password
@@ -63,7 +60,7 @@ UserSchema.methods.isValidatedPassword = async function (usersendPassword) {
 
 //crete and return jwt token
 UserSchema.methods.getToken = function () {
- return jwt.sign({ id: this._id }, _config.JWT_SECRET, { expiresIn: "12h" });
+  return jwt.sign({ id: this._id }, _config.JWT_SECRET, { expiresIn: "12h" });
 };
 
 //generate forgotpassword token

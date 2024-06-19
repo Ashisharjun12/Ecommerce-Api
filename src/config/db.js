@@ -1,29 +1,22 @@
 import mongoose from "mongoose";
 import { _config } from "./config.js";
 
+const connectDb = async () => {
+  try {
+    mongoose.connection.on("connected", () => {
+      console.log("mongodb successfully connected!!");
+    });
 
-const connectDb = async()=>{
+    mongoose.connection.on("error", (err) => {
+      console.log("connection error in db ", err);
+    });
 
-    try {
-        mongoose.connection.on("connected" , ()=>{
-            console.log("mongodb successfully connected!!")
-        })
+    await mongoose.connect(_config.MONGO_URI);
+  } catch (error) {
+    console.log("mongodb connection errror : ", error);
 
-        mongoose.connection.on("error", (err) => {
-            console.log("connection error in db ", err);
-          });
-
-          await mongoose.connect(_config.MONGO_URI)
-        
-    } catch (error) {
-        console.log("mongodb connection errror : ", error);
-
-        process.exit(1)
-        
-    }
-
-
-}
-
+    process.exit(1);
+  }
+};
 
 export default connectDb;

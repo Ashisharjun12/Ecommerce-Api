@@ -13,6 +13,10 @@ const {
   SMTP_PORT,
   SMTP_USER,
   SMTP_PASS,
+  STRIPE_API_KEY,
+  STRIPE_SECRET,
+  RAZORPAY_API_KEY,
+  RAZORPAY_SECRET
 } = process.env;
 
 export const _config = {
@@ -26,4 +30,8 @@ export const _config = {
   SMTP_PORT,
   SMTP_USER,
   SMTP_PASS,
+  STRIPE_API_KEY,
+  STRIPE_SECRET,
+  RAZORPAY_API_KEY,
+  RAZORPAY_SECRET
 };

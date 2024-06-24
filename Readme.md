@@ -230,6 +230,9 @@ Once the server is running, you can access the API at `http://localhost:3000`. U
       "Authorization": "Bearer <token>"
     }
     ```
+## Checking api  from swagger-api-docs
+   - `http://localhost:3000/api-docs/`
+
 
 ## Environment Variables
 

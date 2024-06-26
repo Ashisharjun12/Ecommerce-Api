@@ -1,0 +1,48 @@
+body {
+    background-color: #2e2e2e;
+    color: #ffffff;
+  }
+  
+  .swagger-ui .topbar {
+    background-color: #333333;
+  }
+  
+  .swagger-ui .info, .swagger-ui .opblock-tag-section {
+    background-color: #3a3a3a;
+    border-color: #4a4a4a;
+  }
+  
+  .swagger-ui .opblock, .swagger-ui .response, .swagger-ui .response-col_status, .swagger-ui .response-col_description {
+    background-color: #3a3a3a;
+  }
+  
+  .swagger-ui .btn, .swagger-ui .download-url-wrapper {
+    background-color: #555555;
+    color: #ffffff;
+  }
+  
+  .swagger-ui .btn:hover {
+    background-color: #666666;
+  }
+  
+  .swagger-ui .parameter__name, .swagger-ui .parameter__type {
+    color: #b5b5b5;
+  }
+  
+  .swagger-ui .opblock-summary-method, .swagger-ui .opblock-summary-path {
+    color: #ffffff;
+  }
+  
+  .swagger-ui .opblock-summary {
+    border-color: #4a4a4a;
+  }
+  
+  .swagger-ui .scheme-container {
+    background-color: #4a4a4a;
+  }
+  
+  .swagger-ui .parameter__in {
+    background-color: #555555;
+    color: #ffffff;
+  }
+  

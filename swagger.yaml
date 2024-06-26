@@ -4,8 +4,6 @@ info:
   version: 1.0.0
   description: API documentation for the E-Commerce Backend application
 
-
-
 paths:
   /api/v1/user/signUp:
     post:
@@ -17,24 +15,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                firstname:
-                  type: string
-                  example: John
-                lastname:
-                  type: string
-                  example: Doe
-                email:
-                  type: string
-                  example: john.doe@example.com
-                password:
-                  type: string
-                  example: Password123
-                photo:
-                  type: string
-                  format: binary
-                  example: examplePhoto.png
+              $ref: '#/components/schemas/UserSignUp'
       responses:
         '200':
           description: User signed up successfully
@@ -49,14 +30,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  example: john.doe@example.com
-                password:
-                  type: string
-                  example: Password123
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '200':
           description: User logged in successfully
@@ -80,11 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  example: john.doe@example.com
+              $ref: '#/components/schemas/ForgotPassword'
       responses:
         '200':
           description: Password reset email sent
@@ -106,14 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                  example: NewPassword123
-                confirmpassword:
-                  type: string
-                  example: NewPassword123
+              $ref: '#/components/schemas/ResetPassword'
       responses:
         '200':
           description: Password reset successfully
@@ -141,14 +104,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                oldpassword:
-                  type: string
-                  example: OldPassword123
-                newpassword:
-                  type: string
-                  example: NewPassword123
+              $ref: '#/components/schemas/UpdatePassword'
       responses:
         '200':
           description: Password updated successfully
@@ -165,21 +121,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                firstname:
-                  type: string
-                  example: John
-                lastname:
-                  type: string
-                  example: Doe
-                email:
-                  type: string
-                  example: john.doe@example.com
-                photo:
-                  type: string
-                  format: binary
-                  example: examplePhoto.png
+              $ref: '#/components/schemas/UpdateUserDetails'
       responses:
         '200':
           description: User details updated successfully
@@ -231,20 +173,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                firstname:
-                  type: string
-                  example: John
-                lastname:
-                  type: string
-                  example: Doe
-                email:
-                  type: string
-                  example: john.doe@example.com
-                role:
-                  type: string
-                  example: user
+              $ref: '#/components/schemas/AdminUpdateUser'
       responses:
         '200':
           description: User details updated successfully
@@ -277,9 +206,350 @@ paths:
         '200':
           description: List of all users
 
+  /api/v1/products:
+    post:
+      tags:
+        - products
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Product created successfully
+
+    get:
+      tags:
+        - products
+      summary: Get all products
+      responses:
+        '200':
+          description: List of all products
+
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - products
+      summary: Get product by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      responses:
+        '200':
+          description: Product details retrieved successfully
+
+    put:
+      tags:
+        - products
+      summary: Update product by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Product updated successfully
+
+    delete:
+      tags:
+        - products
+      summary: Delete product by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      responses:
+        '200':
+          description: Product deleted successfully
+
+  /api/v1/order/create:
+    post:
+      tags:
+        - orders
+      summary: Create a new order
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order created successfully
+
+  /api/v1/order/{id}:
+    get:
+      tags:
+        - orders
+      summary: Get order by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      responses:
+        '200':
+          description: Order details retrieved successfully
+
+  /api/v1/myorder:
+    get:
+      tags:
+        - orders
+      summary: Get logged-in user's orders
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of user's orders
+
+  /api/v1/admin/orders:
+    get:
+      tags:
+        - admin
+      summary: Get all orders (Admin)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of all orders
+
+  /api/v1/admin/order/{id}:
+    put:
+      tags:
+        - admin
+      summary: Update order by ID (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUpdateOrder'
+      responses:
+        '200':
+          description: Order status updated successfully
+
+    delete:
+      tags:
+        - admin
+      summary: Delete order by ID (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: 60c72b2f9b1e8b001c8e4d9f
+      responses:
+        '200':
+          description: Order deleted successfully
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  schemas:
+    UserSignUp:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: password123
+        avatar:
+          type: string
+          format: binary
+
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: password123
+
+    ForgotPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+
+    ResetPassword:
+      type: object
+      properties:
+        password:
+          type: string
+          example: newpassword123
+
+    UpdatePassword:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: oldpassword123
+        newPassword:
+          type: string
+          example: newpassword123
+
+    UpdateUserDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        avatar:
+          type: string
+          format: binary
+
+    AdminUpdateUser:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        role:
+          type: string
+          example: user
+
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Sample Product
+        price:
+          type: number
+          example: 99.99
+        description:
+          type: string
+          example: This is a sample product
+        category:
+          type: string
+          example: Electronics
+        stock:
+          type: number
+          example: 10
+        images:
+          type: array
+          items:
+            type: string
+            format: binary
+
+    Order:
+      type: object
+      properties:
+        shippingInfo:
+          type: object
+          properties:
+            address:
+              type: string
+              example: 123 Main St
+            city:
+              type: string
+              example: Springfield
+            phoneNo:
+              type: string
+              example: 1234567890
+            postalcode:
+              type: string
+              example: 12345
+            state:
+              type: string
+              example: IL
+            country:
+              type: string
+              example: USA
+        orderItems:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Product Name
+              quantity:
+                type: number
+                example: 2
+              image:
+                type: string
+                example: productImage.png
+              price:
+                type: number
+                example: 99.99
+              product:
+                type: string
+                example: 60c72b2f9b1e8b001c8e4d9f
+        paymentInfo:
+          type: object
+          properties:
+            id:
+              type: string
+              example: paymentId
+        taxAmount:
+          type: number
+          example: 5.99
+        shippingAmount:
+          type: number
+          example: 10.99
+        totalAmount:
+          type: number
+          example: 116.97
+
+    AdminUpdateOrder:
+      type: object
+      properties:
+        orderStatus:
+          type: string
+          example: delivered

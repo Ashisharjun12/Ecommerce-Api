@@ -9,7 +9,7 @@ import paymentRoute from "./routes/PaymentRoute.js";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import path from "path";
-import { fileURLToPath } from 'url';
+
 
 // Load Swagger document
 const swaggerDocument = YAML.load(path.resolve("./swagger.yaml"));
@@ -24,18 +24,10 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-//dark mode
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use('/swaggerDark.css', express.static(path.join(__dirname, 'swaggerDark.css')));
 
-// Customize Swagger UI options to include the dark mode CSS
-const swaggerOptions = {
-  customCssUrl: '/swaggerDark.css',
-};
 
 // Swagger route
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument ));
 
 // Check server
 app.get("/", (req, res) => {

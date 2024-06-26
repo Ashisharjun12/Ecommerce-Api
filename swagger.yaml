@@ -390,18 +390,30 @@ components:
     UserSignUp:
       type: object
       properties:
-        name:
+        firstname:
           type: string
-          example: John Doe
+          example: John
+          description: User's first name
+          required: true
+        lastname:
+          type: string
+          example: Doe
+          description: User's last name
         email:
           type: string
+          format: email
           example: johndoe@example.com
+          description: User's email address
+          required: true
         password:
           type: string
           example: password123
-        avatar:
+          description: User's password (min 6 characters)
+          required: true
+        photo:
           type: string
           format: binary
+          description: User's profile photo (optional)
 
     UserLogin:
       type: object
